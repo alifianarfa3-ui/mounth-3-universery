@@ -1,1 +1,169 @@
-# mounth-3-universery
+# <!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>3 Bulan Kita 💖</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Comic Sans MS', cursive;
+    }
+
+    body {
+      height: 100vh:
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      width: 320px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      animation: pop 0.8s ease;
+      z-index: 2;
+    }
+
+    @keyframes pop {
+      from { transform: scale(0); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    h1 {
+      color: #ff4d6d;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #555;
+      margin-bottom: 15px;
+      font-size: 16px;
+    }
+
+    button {
+      background: #ff4d6d;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: 0.3s;
+      font-size: 14px;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+    }
+
+    .heart {
+      position: absolute;
+      top: -20px;
+      font-size: 20px;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* KEJUTAN */
+    .surprise {
+      position: fixed;
+      inset: 0;
+      background: rgba(255, 182, 193, 0.95);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      animation: pop 0.8s ease;
+    }
+
+    .runaway {
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card" id="card">
+    <h1>💖 Happy 3 Months 💖</h1>
+    <p id="text">Makasih yaa udah nemenin aku sejauh ini 🥺✨</p>
+    <button onclick="nextText()">Klik aku 😚</button>
+  </div>
+
+  <script>
+    const texts = [
+      "3 bulan sama kamu tuh cepet banget 💕",
+      "Aku suka cara kamu bikin aku senyum 😆",
+      "Maaf kalau aku kadang nyebelin 🙈",
+      "Tapi serius deh...",
+      "Aku nyaman sama kamu 🥰"
+    ];
+
+    let index = 0;
+
+    function nextText() {
+      if (index < texts.length) {
+        document.getElementById("text").innerText = texts[index];
+        index++;
+      } else {
+        showSurprise();
+      }
+    }
+
+    function showSurprise() {
+      document.getElementById("card").remove();
+
+      const div = document.createElement("div");
+      div.className = "surprise";
+      div.innerHTML = `
+        <h1>🎉 KEJUTAN 🎉</h1>
+        <p>Kamu sayang aku gak? 😳💖</p>
+        <button onclick="loveAnswer()">Iyaa 🥰</button>
+        <button class="runaway" id="noBtn">Engga 😝</button>
+      `;
+      document.body.appendChild(div);
+
+      const noBtn = document.getElementById("noBtn");
+      noBtn.addEventListener("mouseover", () => {
+        noBtn.style.left = Math.random() * 80 + "vw";
+        noBtn.style.top = Math.random() * 80 + "vh";
+      });
+    }
+
+    function loveAnswer() {
+      document.body.innerHTML = `
+        <div class="card">
+          <h1>💖 YEAYYY 💖</h1>
+          <p>Aku juga sayang kamu 🥺💞</p>
+          <p>Semoga kita bisa bareng terus yaa 🤗</p>
+          <p><b>Happy 3 Months 💕</b></p>
+        </div>
+      `;
+    }
+
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerText = "💗";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (2 + Math.random() * 3) + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }
+
+    setInterval(createHeart, 300);
+  </script>
+
+</body>
+</html>
